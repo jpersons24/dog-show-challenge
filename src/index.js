@@ -12,7 +12,7 @@ let form = document.querySelector('#dog-form')
 function renderDogObj(dogObj) {
    // add each dog obj as a table row into html
    tableBody.innerHTML += 
-      `<tr>
+      `<tr data-id='${dogObj.id}'>
          <td id="name">${dogObj.name}</td> 
          <td id="breed">${dogObj.breed}</td> 
          <td id="sex">${dogObj.sex}</td> 
@@ -58,12 +58,17 @@ function updateDogInfo(newDogInfo) {
 
 // EVENT LISTENERS
 
-function handleEditBtn(name, breed, sex) {
+function handleEditBtn(name, breed, sex, id) {
    // assign form field values equal to dog obj values
    form.name.value = name
    form.breed.value = breed
    form.sex.value = sex
    console.log('Edit away')
+}
+
+function getObjId(id){
+   let id = id
+   console.log(id)
 }
 
 
@@ -74,12 +79,14 @@ table.addEventListener('click', function(event){
       // capture table row values
       const editBtn = event.target
       const tableRow = editBtn.closest('tr')
+      const id = tableRow.dataset.id
       const name = tableRow.querySelector('#name').innerText
       const breed = tableRow.querySelector('#breed').innerText
       const sex = tableRow.querySelector('#sex').innerText
       
       // enter them into form fields
       handleEditBtn(name, breed, sex)
+      getObjId(id)
    }
 })
 
@@ -91,6 +98,7 @@ form.addEventListener('submit', function(event) {
    let name = event.target.name.value
    let breed = event.target.breed.value
    let sex = event.target.sex.value
+   // let id = 
 
    // inser input values into object to be passed to patch request
    let newDogInfo = {
@@ -100,5 +108,5 @@ form.addEventListener('submit', function(event) {
    }
 
    // send patch request
-   updateDogInfo(newDogInfo, id)
+   // updateDogInfo(newDogInfo, id)
 })
