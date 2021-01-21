@@ -67,7 +67,7 @@ function handleEditBtn(name, breed, sex, id) {
 }
 
 function getObjId(id){
-   let id = id
+   // let id = id
    console.log(id)
 }
 
@@ -98,7 +98,7 @@ form.addEventListener('submit', function(event) {
    let name = event.target.name.value
    let breed = event.target.breed.value
    let sex = event.target.sex.value
-   // let id = 
+   let id = getObjId(id)
 
    // inser input values into object to be passed to patch request
    let newDogInfo = {
@@ -107,6 +107,7 @@ form.addEventListener('submit', function(event) {
       sex: sex
    }
 
+   console.log(newDogInfo, id)
    // send patch request
    // updateDogInfo(newDogInfo, id)
 })
